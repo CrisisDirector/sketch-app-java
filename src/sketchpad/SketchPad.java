@@ -42,18 +42,26 @@ public class SketchPad {
         // the code here runs whenever the program's state changes
         // currently, this implements an always-on pen tool: the mouse acts like a multi-coloured pen
 
-        // set the pen colour
+        // set the pen colour - currently, this is random and everchanging
         paint.setLineColor(
           Generator.randomInt(256),
           Generator.randomInt(256),
           Generator.randomInt(256)
         );
-        
-        // draw a line from the current mouse location to the previous mouse location
-        paint.drawLine(prevMouseX, prevMouseY, mouseInfo.getX(), mouseInfo.getY());
 
+        // only use the pen if the left mouse button is pressed down
+        if (mouseInfo.isMouseDragged() &&
+          mouseInfo.getX() >= 30 &&
+          mouseInfo.getX() <= screen.getWidth() - 30 &&
+          mouseInfo.getY() >= 30 &&
+          mouseInfo.getY() <= screen.getWidth() - 30) {
+              // draw a line from the current mouse location to the previous mouse location
+              paint.drawLine(prevMouseX, prevMouseY, mouseInfo.getX(), mouseInfo.getY());
+            }
+        
         // Update the previous location values of the mouse
         prevMouseX = mouseInfo.getX();
         prevMouseY = mouseInfo.getY();
+          
     }
 }
