@@ -30,6 +30,12 @@ public class PaintingTool {
         applet.rect(leftX, topY, width, height);
     }
 
+    public void drawTriangle(int x1, int y1, int x2, int y2, int x3, int y3) {
+        applet.line(x1, y1, x2, y2);
+        applet.line(x2, y2, x3, y3);
+        applet.line(x3, y3, x1, y1);
+    }
+
     public void drawCircle(int centerX, int centerY, int radius) {
         applet.ellipse(centerX, centerY, 2 * radius, 2 * radius);
     }
