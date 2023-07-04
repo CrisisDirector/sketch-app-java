@@ -50,6 +50,7 @@ public class SketchPad {
         );
 
         // only use the pen if the left mouse button is pressed down
+        // the pen only works if used inside the white sketch canvas
         if (mouseInfo.isMouseDragged() &&
           mouseInfo.getX() >= 30 &&
           mouseInfo.getX() <= screen.getWidth() - 30 &&
