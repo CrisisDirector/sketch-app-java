@@ -4,31 +4,46 @@ import buttons.*;
 import tools.*;
 
 public class SketchPad {
+    // set up screen, mouse tracker, and painting tools
     private final Screen screen = new Screen();
     private final MouseInfo mouseInfo = new MouseInfo();
     private final PaintingTool paint = new PaintingTool();
 
-    // Declaring variables to represent the last location of the mouse
-    private int lastMouseX;
-    private int lastMouseY;
+    // Declare variables that store the previous mouse coordinates
+    private int prevMouseX;
+    private int prevMouseY;
 
     // Declare a button to clear the sketchpad
     private ClearButton cb = new ClearButton(5, 5, 20, Color.WHITE);
 
     public void initialLaunch() {
-        // The background color
-        screen.setBackgroundColor(Color.CYAN);
+        // Set the background color to a light green
+        screen.setBackgroundColor(new Color(127, 255, 127));;
 
-        // Generate many random circles for a colorful backdground
-        for (int circleNumber = 0; circleNumber < 500; circleNumber++) {
+        // Generate many random circles for a colorful backdground for the sketch pad
+        for (int circleNumber = 0; circleNumber < 200; circleNumber++) {
             drawRandomCircle();
         }
+        
+        // draw the blue corners of the sketchpad
+        paint.setFillColor(Color.BLUE);
+        paint.drawCircle(0, 40, 20);
+        paint.drawCircle(0, 360, 20);
+        paint.drawCircle(600, 40, 20);
+        paint.drawCircle(600, 360, 20);
 
-        // The interior sketch surface
+        // draw the blue corners of the sketchpad
+        paint.setFillColor(Color.RED);
+        paint.drawCircle(40, 0, 20);
+        paint.drawCircle(40, 400, 20);
+        paint.drawCircle(560, 0, 20);
+        paint.drawCircle(560, 400, 20);
+
+        // draw the white canvas of the sketchpad
         paint.setFillColor(Color.WHITE);
         paint.drawRect(30, 30, 540, 340);
 
-        // The clear button is drawn
+        // draw the clear button
         cb.drawSelf();
     }
 
@@ -43,13 +58,13 @@ public class SketchPad {
         // The clear button checks all the time if it's pressed
         cb.update();
       
-        // If the mouse was just clicked, update the last mouse location data
+        // If the mouse was just clicked, update it's last known coordinates
         if (mouseInfo.isMousePressed()) {
-            lastMouseX = mouseInfo.getX();
-            lastMouseY = mouseInfo.getY();
+            prevMouseX = mouseInfo.getX();
+            prevMouseY = mouseInfo.getY();
         }
 
-        // Only draw lines if the mouse was dragged and inside the interior sketch surface
+        // Only draw lines if the mouse is dragged inside the white sketch canvas
         if (mouseInfo.isMouseDragged() &&
             mouseInfo.getX() >= 30 &&
             mouseInfo.getX() <= 570 &&
@@ -57,8 +72,8 @@ public class SketchPad {
             mouseInfo.getY() <= 370) {
 
             paint.drawLine(mouseInfo.getX(), mouseInfo.getY(), lastMouseX, lastMouseY);
-            lastMouseX = mouseInfo.getX();
-            lastMouseY = mouseInfo.getY();
+            prevMouseX = mouseInfo.getX();
+            prevMouseY = mouseInfo.getY();
         }
 
     }
