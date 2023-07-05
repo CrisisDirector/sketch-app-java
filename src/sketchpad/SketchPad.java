@@ -19,6 +19,11 @@ public class SketchPad {
         // set the background colour to a light green
         screen.setBackgroundColor(new Color(127, 255, 127));
 
+        // draw a random assortment of circles in the sketchpad's background
+        for (int circleNumber = 0; circleNumber < 80; circleNumber++) {
+            drawRandomCircle();
+        }
+
         // draw the blue corners of the sketchpad
         paint.setFillColor(Color.BLUE);
         paint.drawCircle(0, 40, 20);
@@ -65,4 +70,21 @@ public class SketchPad {
         prevMouseY = mouseInfo.getY();
           
     }
+    public void drawRandomCircle() {
+        // define the center coordinates
+        int x = Generator.randomInt(screen.getWidth());
+        int y = Generator.randomInt(screen.getHeight());
+        
+        // fix the radius
+        int radius = Generator.randomInt(10, 30);
+        
+        // pick random RGB values for the fill color
+        int r = Generator.randomInt(255);
+        int g = Generator.randomInt(255);
+        int b = Generator.randomInt(255);
+        
+        // Set the fill color and draw the circle
+        paint.setFillColor(r, g, b);
+        paint.drawCircle(x, y, radius);
+}
 }
