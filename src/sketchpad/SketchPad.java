@@ -16,6 +16,10 @@ public class SketchPad {
     // Declare a button to clear the sketchpad
     private ClearButton cb = new ClearButton(5, 5, 20, Color.WHITE);
 
+    // Declare two pen colour buttons - one red and one blue
+    private PenColorButton pen1 = new PenColorButton(50, 5, 20, Color.RED);
+    private PenColorButton pen2 = new PenColorButton(70, 5, 20, Color.BLUE);
+
     public void initialLaunch() {
         // Set the background color to a light green
         screen.setBackgroundColor(new Color(127, 255, 127));;
@@ -45,6 +49,10 @@ public class SketchPad {
 
         // draw the clear button
         cb.drawSelf();
+
+        // draw the two pen colour buttons
+        pen1.drawSelf();
+        pen2.drawSelf();
     }
 
     public void update() {
@@ -57,6 +65,10 @@ public class SketchPad {
 
         // The clear button checks all the time if it's pressed
         cb.update();
+
+        // As do the two pen colour buttons
+        pen1.update();
+        pen2.update();
       
         // If the mouse was just clicked, update it's last known coordinates
         if (mouseInfo.isMousePressed()) {
