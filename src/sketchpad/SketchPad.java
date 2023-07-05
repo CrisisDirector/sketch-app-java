@@ -71,7 +71,7 @@ public class SketchPad {
             mouseInfo.getY() >= 30 &&
             mouseInfo.getY() <= 370) {
 
-            paint.drawLine(mouseInfo.getX(), mouseInfo.getY(), lastMouseX, lastMouseY);
+            paint.drawLine(mouseInfo.getX(), mouseInfo.getY(), prevMouseX, prevMouseY);
             prevMouseX = mouseInfo.getX();
             prevMouseY = mouseInfo.getY();
         }
@@ -79,12 +79,19 @@ public class SketchPad {
     }
 
     public void drawRandomCircle() {
-        int x = Generator.randomInt(600);
-        int y = Generator.randomInt(400);
+        // define the center coordinates
+        int x = Generator.randomInt(screen.getWidth());
+        int y = Generator.randomInt(screen.getHeight());
+
+        // fix the radius
         int radius = Generator.randomInt(10, 30);
+
+        // pick random RGB values for the fill color
         int r = Generator.randomInt(255);
         int g = Generator.randomInt(255);
         int b = Generator.randomInt(255);
+
+        // Set the fill color and draw the circle
         paint.setFillColor(r, g, b);
         paint.drawCircle(x, y, radius);
     }
